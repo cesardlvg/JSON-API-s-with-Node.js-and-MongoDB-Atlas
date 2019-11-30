@@ -1,15 +1,19 @@
 const express = require('express');
 let router = express.Router();
-let db = require("../models");
+let db = require('../models');
+let helpers = require('../helpers/todos');
 
-router.get('/', function(req, res){
-	db.Todo.find();
-	.then(function(todos){
-		res.json(todos);
-	})
-	.catch(function(err){
-		res.send(err);
-	})
-});
+//get all to-dos and create a new to-do
+router.route('/')
+	.get(helpers.getTodos)
+	.post(helpers.createTodo)
+
+//get individual to-do, update individual to-do and delete individual to-do
+router.route('/:todoId')
+	.get(helpers.getTodo)
+	.put(helpers.updateTodo)
+	.delete(helpers.deleteTodo)
+
+
 
 module.exports = router;
