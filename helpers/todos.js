@@ -46,7 +46,7 @@ exports.updateTodo = function(req, res){
 
 // delete to-dos - used in the todo route
 exports.deleteTodo = function(req, res){
-	db.Todo.delete({_id: req.params.todoId})
+	db.Todo.remove({_id: req.params.todoId})
 	.then(function(){
 		res.json({message: 'task deleted'})
 	})
